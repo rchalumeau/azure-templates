@@ -18,12 +18,8 @@
       "comments": "NIC for the front servers. Related to the number of instances",
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Network/networkInterfaces",
-      "name": "[concat(parameters('NICPrefix'), copyindex(1))]",
+      "name": "[parameters('NICPrefix')]",
       "location": "[resourceGroup().location]",
-      "copy": {
-        "name": "NicLoop",
-        "count": "[parameters('count')]"
-      },
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworks/', parameters('vnet'))]"
       ],
