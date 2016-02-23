@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+      "count": { "type": "integer" },
+      "namePrefix": { "type": "string" },
+      "NICPrefix": { "type": "string" },
+      "size": { "type": "string" },
+      "adminUser": { "type": "string" },
+      "adminPassword": { "type": "string" },
+      "image": { "type": "string" },
+      "vnet": { "type": "string" },
+      "vnetId": { "type": "string" },
+      "subnet": { "type": "string" }
+  },
+  "resources": [
+    {
+      "comments": "NIC for the front servers. Related to the number of instances",
+      "apiVersion": "2015-06-15",
+      "type": "Microsoft.Network/networkInterfaces",
+      "name": "[concat(parameters('NICPrefix'), copyindex(1))]",
+      "location": "[resourceGroup().location]",
+      "copy": {
+        "name": "NicLoop",
+        "count": "[parameters('count')]"
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Network/virtualNetworks/', parameters('vnet'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[concat(parameters('vnetId'),'/subnets/', parameters('subnet')]"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
