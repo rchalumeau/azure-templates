@@ -17,7 +17,7 @@
   "resources": [
     {
       "comments": "NIC for the front servers. Related to the number of instances",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2015-01-01",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[parameters('NICPrefix')]",
       "location": "[parameters('location')]",
