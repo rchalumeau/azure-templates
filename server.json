@@ -14,7 +14,7 @@
       "vnetId": { "type": "string" },
       "subnet": { "type": "string" }
   },
-  "resources": [
+  "reources": [
     {
       "comments": "NIC for the front servers. Related to the number of instances",
       "apiVersion": "2015-01-01",
