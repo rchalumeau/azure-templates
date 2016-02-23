@@ -3,6 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
       "count": { "type": "integer" },
+      "location": { "type": "string" },
       "namePrefix": { "type": "string" },
       "NICPrefix": { "type": "string" },
       "size": { "type": "string" },
@@ -19,7 +20,7 @@
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[parameters('NICPrefix')]",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('location')]",
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworks/', parameters('vnet'))]"
       ],
